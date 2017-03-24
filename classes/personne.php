@@ -42,9 +42,27 @@ class Etudiant extends Personne{
 		$this->_ville = $ville;
 		$this->_ufr = $ufr;
 	}
-	public function calculFrais($cf){
 
-		return $f;
+	private function calculFrais($cf){
+		// les frais de scolarité se calculent sur la base du coefficient familial
+		// un $cf non-numérique donnera des frais de scolarité égaux à -1
+		if (is_numeric($cf)){
+			if($cf <= 12620) 	return 0.00;
+			if($cf <= 13190) 	return 100.00;
+			if($cf <= 15640) 	return 125.50;
+			if($cf <= 24740) 	return 189.00;
+			if($cf <= 31810) 	return 233.25;
+			if($cf <= 39970)	return 275.60;
+			if($cf <= 48360) 	return 432.15;
+			if($cf <= 55790) 	return 560.40;
+			if($cf <= 92970) 	return 789.60;
+			if($cf <= 127860) 	return 1325.00;
+			if($cf <= 151250) 	return 1698.50;
+			if($cf <= 172040) 	return 2796.00;
+			if($cf <= 195000) 	return 3845.90;
+			else 				return 12589.00;
+		}
+		else return -1;
 	}
 }
 
@@ -63,7 +81,7 @@ class Professeur extends Personne{
 		$this->_arrCours = defCours($this->_ufr);
 		$this->_arrVille = defVilles();
 	}
-	
+
 	private defCours($ufr){
 
 	}
