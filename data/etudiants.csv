@@ -1,0 +1,101 @@
+id;Nom;Prenom;Adresse;Ville;Age;Coef_fam;Cursus
+200;Hardy;Fredericka;Burlington;Rennes;27;37252;DSP
+201;Guy;Cheryl;Villa Alemana;Saint-Nazaire;18;228861;LET
+202;Wolf;Theodore;New Galloway;Saint-Nazaire;22;102795;LNG
+203;Curtis;Jackson;Malonne;Rennes;26;197501;MED
+204;Rogers;Deirdre;El Quisco;Rennes;27;208832;LET
+205;Collier;Mark;Bazel;Saint-Nazaire;30;234302;LNG
+206;Moody;Bernard;Rodez;Saint-Nazaire;23;3841;MED
+207;Haynes;Elton;Fontenoille;Rennes;19;22167;LET
+208;Boyle;Dante;Aiseau-Presles;Saint-Nazaire;22;140363;SCI
+209;Hines;Autumn;Blairgowrie;Nantes;23;4850;LNG
+210;Hays;Kevyn;Schwäbisch Gmünd;Nantes;26;182405;MED
+211;Rios;Zelenia;Saint-Nazaire;Rennes;18;217051;MED
+212;Landry;Quamar;Fairbanks;Saint-Nazaire;26;169292;DSP
+213;Luna;Mara;Lakewood;Saint-Nazaire;24;167348;LET
+214;Hampton;Dorothy;Poggio Berni;Nantes;22;74808;DSP
+215;Boyer;Illiana;Ransart;Nantes;30;87099;LNG
+216;Flynn;Jared;Liers;Rennes;18;80341;MED
+217;Weaver;Ria;Serik;Saint-Nazaire;18;232439;SCI
+218;Flores;Destiny;Hallein;Saint-Nazaire;30;191114;LNG
+219;Barber;Vivian;Senneville;Rennes;19;138823;LET
+220;Rush;Castor;Glossop;Saint-Nazaire;23;239372;LNG
+221;Calderon;Montana;Düsseldorf;Rennes;24;22158;MED
+222;Carver;Regina;Buxton;Nantes;29;111085;LNG
+223;Merrill;Oprah;Aurora;Rennes;19;56100;HIS
+224;Mcconnell;Demetrius;Toruń;Nantes;29;39974;LET
+225;Wolf;Armand;Eisenstadt;Nantes;21;2148;LNG
+226;Mckenzie;Riley;Cappelle sul Tavo;Saint-Nazaire;23;242510;SCI
+227;Oneal;Aiko;Fratta Todina;Rennes;26;10149;DSP
+228;Bullock;Alma;Mercedes;Nantes;24;111857;DSP
+229;Patton;Carla;Dordrecht;Nantes;18;169902;DSP
+230;Sharp;Flynn;Judenburg;Rennes;26;167887;LNG
+231;Barnett;Aaron;Ajax;Nantes;23;49458;LET
+232;Mcneil;Madeline;Saint-Vincent;Rennes;27;82832;LNG
+233;Reynolds;Yvette;Kaiserslauter;Saint-Nazaire;24;240999;DSP
+234;Dawson;Ifeoma;Pironchamps;Saint-Nazaire;27;4392;SCI
+235;Joseph;Sydnee;Goderich;Saint-Nazaire;25;167774;HIS
+236;Mullins;Belle;Grandrieu;Nantes;18;184359;MED
+237;Bass;Kyle;Ingraj Bazar;Nantes;24;198668;LET
+238;Roach;Jordan;Gaasbeek;Saint-Nazaire;25;232439;LNG
+239;Bullock;Amir;Tropea;Rennes;27;7703;MED
+240;Hardy;Carolyn;Junagadh;Saint-Nazaire;18;45653;DSP
+241;Key;Dora;Madison;Rennes;30;167253;HIS
+242;Mack;Hayfa;Franeker;Rennes;25;86973;DSP
+243;Hester;Ebony;Sint-Pieters-Woluwe;Rennes;20;15128;SCI
+244;Gray;Michael;Lowestoft;Nantes;20;186025;MED
+245;Lambert;Erasmus;Fernie;Nantes;22;233590;LET
+246;Rodriquez;Cally;Kawartha Lakes;Saint-Nazaire;25;73213;HIS
+247;Levine;Rigel;Gravelbourg;Rennes;20;128279;SCI
+248;Vega;Samuel;Birkenhead;Saint-Nazaire;19;36067;SCI
+249;Cobb;Vivian;Erie;Saint-Nazaire;18;108337;SCI
+250;Mccarthy;Kyla;Portico e San Benedetto;Rennes;25;223721;MED
+251;Lucas;Bertha;Whakatane;Rennes;20;160515;LET
+252;Thomas;Kamal;Kuringen;Nantes;22;106421;HIS
+253;Curry;John;Quinte West;Rennes;29;77955;DSP
+254;Cardenas;Quyn;Potsdam;Nantes;29;42336;LNG
+255;Forbes;Brielle;Karnal;Saint-Nazaire;29;112585;LET
+256;Jordan;Brett;Tongue;Rennes;20;197991;HIS
+257;French;Amos;La Magdeleine;Saint-Nazaire;28;156177;MED
+258;Baxter;Briar;Owensboro;Rennes;28;116772;HIS
+259;West;Melodie;Nanaimo;Saint-Nazaire;23;108693;DSP
+260;Ramirez;Colorado;Chandler;Nantes;24;95946;LNG
+261;Mercado;Noble;Puqueldón;Saint-Nazaire;18;200355;SCI
+262;Booker;Desiree;Evere;Nantes;25;239520;HIS
+263;Gordon;Ross;Heusden;Nantes;28;176054;HIS
+264;Harrington;Amber;Santa Flavia;Nantes;27;154736;HIS
+265;Gonzales;Ryder;Nederhasselt;Nantes;20;115715;MED
+266;Mccarthy;Kane;Balurghat;Rennes;25;137445;LET
+267;Shepherd;MacKenzie;Notre-Dame-de-la-Salette;Nantes;30;50455;SCI
+268;Harris;Malcolm;Cantley;Nantes;22;113840;HIS
+269;Vaughn;Tarik;Whyalla;Rennes;26;1485;LNG
+270;Horne;Whilemina;Chiavari;Rennes;19;48978;SCI
+271;Huffman;Jorden;Newark;Nantes;18;185809;SCI
+272;Dennis;Marcia;Kolhapur;Rennes;20;93287;DSP
+273;Hines;Barrett;Schore;Saint-Nazaire;28;51796;LNG
+274;Holt;Herrod;Jundiaí;Saint-Nazaire;19;199540;LNG
+275;Duke;Shaine;Burntisland;Nantes;20;128368;MED
+276;Byrd;Britanney;Marcq-en-Baroeul;Nantes;25;81431;DSP
+277;Benjamin;Rae;La Rochelle;Saint-Nazaire;30;56345;HIS
+278;Hickman;Quincy;Basirhat;Rennes;20;192235;DSP
+279;Mayo;Lunea;Nobressart;Rennes;22;51536;HIS
+280;Bradford;Colin;Jamoigne;Saint-Nazaire;25;45955;LNG
+281;Henson;Elmo;Kamalia;Rennes;25;181705;LET
+282;Dean;Kirsten;La Cisterna;Nantes;30;39739;MED
+283;Ewing;Dieter;Tulita;Saint-Nazaire;25;152934;MED
+284;Crane;Raven;Wilhelmshaven;Saint-Nazaire;23;61050;MED
+285;Goff;Zoe;Jolanda di Savoia;Rennes;21;157551;DSP
+286;Zamora;Upton;Kampenhout;Saint-Nazaire;23;12545;DSP
+287;Conway;Xyla;Potsdam;Rennes;18;122072;LNG
+288;Wilkins;Abdul;Jupille-sur-Meuse;Nantes;18;242401;LET
+289;Webster;Ora;Almería;Nantes;19;97302;LNG
+290;Farmer;Yoshio;Oviedo;Nantes;22;129776;LET
+291;Wilcox;Quail;Blumenau;Rennes;21;25742;MED
+292;Rodriguez;Giacomo;Eastbourne;Rennes;28;183295;DSP
+293;Weaver;Kerry;Castle Douglas;Nantes;25;21859;DSP
+294;Bradshaw;Curran;Castel Ritaldi;Saint-Nazaire;24;198701;SCI
+295;Berg;Clinton;Rio Saliceto;Nantes;30;158245;LET
+296;Ramos;Jillian;Fiumara;Rennes;22;115184;LET
+297;Meyers;Rudyard;Cote-Saint-Luc;Rennes;30;211201;SCI
+298;Grant;Kessie;Remscheid;Nantes;24;209112;LNG
+299;Jarvis;Wynne;Lansing;Nantes;24;63803;HIS
