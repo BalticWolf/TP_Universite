@@ -1,4 +1,4 @@
-id;Nom;Prenom;Adresse;Ville;Age;Coef_fam;Cursus
+id|Nom|Prenom|Adresse|Ville|Age|Coef_fam|UFR
 200;Hardy;Fredericka;Burlington;Rennes;27;37252;DSP
 201;Guy;Cheryl;Villa Alemana;Saint-Nazaire;18;228861;LET
 202;Wolf;Theodore;New Galloway;Saint-Nazaire;22;102795;LNG

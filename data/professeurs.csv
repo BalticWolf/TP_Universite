@@ -1,4 +1,4 @@
-id;Nom;Prenom;Ville;Age;Salaire;Ville_rattach;Cursus_rattach
+id|Nom|Prenom|Adresse|Age|Salaire|Ville_rattach|Cursus_rattach
 100;Rowe;Kennedy;Burlington;37;€3 680;Rennes;DSP
 101;Rhodes;Connor;Villa Alemana;43;€2 815;Rennes;DSP
 102;Andrews;Mallory;New Galloway;61;€3 394;Nantes;HIS
