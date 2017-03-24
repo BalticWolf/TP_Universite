@@ -1,0 +1,37 @@
+id;Cours;UFR
+10;Droit général;DSP
+11;Droit des affaires;DSP
+12;Droit notarial;DSP
+13;Droit privé général;DSP
+20;Anglais;LNG
+21;Arabe;LNG
+22;Allemand;LNG
+23;Italien;LNG
+24;Russe;LNG
+25;Espagnol;LNG
+26;Polonais;LNG
+27;Portugais;LNG
+30;Cancérologie;MED
+31;Sommeil;MED
+32;Pédiatrie;MED
+33;Cardiologie;MED
+34;Neurologie;MED
+35;Gérontologie;MED
+36;Oncogériatrie;MED
+40;Chimie;SCI
+41;Mathématiques;SCI
+42;Informatique;SCI
+43;Physique;SCI
+44;Sciences de la vie;SCI
+45;Sciences de la Terre et de l'Univers;SCI
+50;Médiévale;HIS
+51;Ancienne;HIS
+52;Contemporaine;HIS
+53;Moderne;HIS
+54;Mondiale;HIS
+60;Lettres Anciennes;LET
+61;Lettres Modernes;LET
+62;Lettres Classiques;LET
+63;Philosophie;LET
+64;Latin;LET
+65;Grec ancien;LET
