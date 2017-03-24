@@ -1,0 +1,3 @@
+<?php 
+//	mon programme principal
+?>
