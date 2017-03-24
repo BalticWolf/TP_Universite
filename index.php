@@ -1,4 +1,11 @@
 <?php 
 require_once('classes/personne.php');
-//	mon programme principal
+require_once('misc/functions.php');
+
+function main(){
+	$professeur1 = new Professeur(154);
+	print $professeur1;
+}
+
+main();
 ?>
