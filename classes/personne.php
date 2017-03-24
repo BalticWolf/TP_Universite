@@ -1,5 +1,5 @@
 <?php
-abstract class Personne{
+class Personne{
 	protected $_id; // identifiant unique d'une personne
 	protected $_nom;
 	protected $_prenom;
@@ -87,7 +87,23 @@ class Professeur extends Personne{
 	}
 
 	private defVilles(){
-
+		$villes = array();
+		$nb_villes = rand(1, 3); // on tire au hasard un nombre de villes dans lesquelles le professeur va enseigner
+		switch ($nb_villes) {
+			case 1:
+				$villes[0] = 'Nantes';
+				break;
+			case 2:
+				$villes[0] = 'Nantes';
+				$villes[1] = 'Saint-Nazaire';
+				break;
+			case 3:
+				$villes[0] = 'Nantes';
+				$villes[1] = 'Saint-Nazaire';
+				$villes[2] = 'Rennes';
+				break;
+		}
+		return $villes;
 	}
 }
 
