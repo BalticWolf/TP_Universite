@@ -103,19 +103,7 @@ class Professeur extends Personne{
 	}
 
 	private defCours($ufr){		// permet de définir la liste des cours que le prof est censé enseigner
-		$coursUFR = array(); 					// constitue l'ensemble des cours dépendant d'une UFR donnée
 		$coursProf = array();					// constitue l'ensemble des cours que le prof va enseigner
-		$fp = fopen('data/cours.csv', 'r');
-		while(!feof($fp)){
-			$current = fgets($fp, 255);
-			if(substr_count($current, ';') == 2){
-				$item = explode(';', $current);
-				if($item[2] == $ufr){ 			// on ne sélectionne que les cours appartenant de l'UFR
-					$coursUFR[] = $item[1]; 	// on stocke seulement le libellé du cours, mais on aurait pu se contenter de son id
-				}
-			}
-		}
-		fclose($fp);
 
 		$nb_coursUFR = count($coursUFR);
 		$nb_cours_prof = rand(1, $nb_coursUFR); 					// on choisit arbitrairement un nombre de matières que le prof enseigne
