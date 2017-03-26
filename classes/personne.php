@@ -98,52 +98,38 @@ class Professeur extends Personne{
 		$this->_salaire = $prof[5];
 		$this->_ville = $prof[6];
 		$this->_ufr = $prof[7];
-		$this->_arrCours = defCours($this->_ufr);
-		$this->_arrVille = defVilles();
+		$this->_arrCours = $this->defCours($this->_ufr);
+		$this->_arrVille = $this->defVilles($this->_ville);
 	}
 
 	private defCours($ufr){		// permet de définir la liste des cours que le prof est censé enseigner
-		$coursUFR = array(); 					// constitue l'ensemble des cours dépendant d'une UFR donnée
 		$coursProf = array();					// constitue l'ensemble des cours que le prof va enseigner
-		$fp = fopen('data/cours.csv', 'r');
-		while(!feof($fp)){
-			$current = fgets($fp, 255);
-			if(substr_count($current, ';') == 2){
-				$item = explode(';', $current);
-				if($item[2] == $ufr){ 			// on ne sélectionne que les cours appartenant de l'UFR
-					$coursUFR[] = $item[1]; 	// on stocke seulement le libellé du cours, mais on aurait pu se contenter de son id
-				}
-			}
-		}
-		fclose($fp);
-
+		//$coursUFR; // doit être issu du constructeur d'UFR.
 		$nb_coursUFR = count($coursUFR);
 		$nb_cours_prof = rand(1, $nb_coursUFR); 					// on choisit arbitrairement un nombre de matières que le prof enseigne
 		while(count($coursProf) < $nb_cours_prof){					// tant qu'on n'a pas attribué le nb correct de cours au prof
 			$coursHasard = $coursUFR[rand(0, $nb_cours_prof - 1)]; 	// on pioche un cours de l'UFR au hasard
 			if(!in_array($coursHasard, $coursProf)){ 				// si le cours ne fait pas déjà partie des cours enseignés par le prof
 				$coursProf[] = $coursHasard; 						// on l'ajoute
+				// il faudrait aussi mentionner le prof courant comme enseignant de l'UFR.
 			}
 		}
 
 		return $coursProf;
 	}
 
-	private defVilles(){		// permet de définir une liste de villes dans lesquelles le professeur va enseigner
-		$villes = array();
-		$nb_villes = rand(2, 3); // on tire au hasard un nombre de villes
+	private defVilles($ville){		// permet de définir au hasard une liste de villes dans lesquelles le professeur va enseigner
+		$villes = array('Nantes', 'Saint-Nazaire', 'Rennes'); 	// ensemble des villes possibles
+		$villesProf = array();									// emsemble des villes dans lesquelles va enseigner le prof
+		$nb_villes = rand(1, 3); 								// on tire au hasard un nombre de villes
 		
-		$villes[0] = 'Nantes'; // par défaut, il enseigne à Nantes.
-		switch ($nb_villes) {
-			case 2:
-				$villes[1] = 'Saint-Nazaire'; // et à St Nazaire s'il enseigne dans 2 villes,
-				break;
-			case 3:
-				$villes[1] = 'Saint-Nazaire';
-				$villes[2] = 'Rennes';			// ou dans les 3 villes
-				break;
+		while(count($villesProf) < $nb_villes){
+			$villeHasard = $villes[rand(1, 3)]; 		// on tire une ville au sort,
+			if(!in_array($villeHasard, $villesProf)){ 	// si le prof n'y enseigne pas déjà,
+				$villesProf[] = $villeHasard; 			// on ajoute cette ville
+			}
 		}
-		return $villes;
+		return $villesProf;
 	}
 }
 
