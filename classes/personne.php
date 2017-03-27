@@ -14,7 +14,10 @@ class Personne{
 		$this->_age = $age;
 	}
 
-	protected function getInfoFromFile($fname, $id){ // permet de renvoyer des infos d'une personne grâce à son ID, sous forme d'un tableau
+	protected function getInfoFromFile($fname, $id){ 
+	// permet de renvoyer des infos d'une personne grâce à son ID, sous forme d'un tableau
+	// l'intérêt est de retirer les données nécessaires aux constructeurs de personnes d'un fichier csv
+		
 		$personne = array();
 		$fp = fopen($fname, 'r');
 		while(!feof($fp)){
@@ -40,6 +43,24 @@ class Personne{
 		return $this;
 	}
 
+	protected function setCours(UFR $ufr){		
+	// permet de définir la liste des cours relatives à la personne
+		$coursUFR = $ufr->get('_arrCours');		// liste des cours de l'UFR
+		$nb_coursUFR = count($coursUFR);
+		
+		$cours = array();						// ensemble des cours relatifs à la personne
+		$nbCours = rand(1, $nb_coursUFR); 		// nombre de matières (tiré au sort) relatifs à la personne 
+
+		while(count($cours) < $nbCours){						// tant qu'on n'a pas attribué le nb de cours choisis
+			$coursHasard = $coursUFR[rand(0, $nbCours - 1)]; 	// on pioche un cours de l'UFR au hasard
+			if(!in_array($coursHasard, $cours)){ 				// si le cours n'est pas déjà dans le tableau
+				$cours[] = $coursHasard; 						// on l'ajoute
+				$coursHasard->ajouterPersonne($this);			// puis on alimente le tableau de personnes du cours
+			}
+		}
+		return $cours;
+	}
+
 	public function __toString(){
 		return $this->get('_prenom')." ".$this->get('_nom')." (".get_class($this)." ".$this->get('_id').")<br/>";
 	}
@@ -51,6 +72,7 @@ class Etudiant extends Personne{
 	protected $_ville; 			// ville à laquelle est rattaché l'étudiant
 	protected $_ufr; 			// Cursus dans lequel est inscrit l'étudiant
 	protected $_arrLivres; 		// liste des livres empruntés par l'étudiant
+	protected $_arrCours;		// liste des cours suivis par l'étudiant
 
 	public function __construct($id){
 		$etud = parent::getInfoFromFile('data/etudiants.csv', $id);
@@ -60,11 +82,12 @@ class Etudiant extends Personne{
 		$this->_ville = $etud[4];
 		$this->_ufr = $etud[7];
 		$this->_arrLivres = array();
+		$this->_arrCours = parent::setCours($this->_ufr);
 	}
 
 	private function calculFrais($cf){
-		// les frais de scolarité se calculent sur la base du coefficient familial
-		// un $cf non-numérique donnera des frais de scolarité égaux à -1
+	// les frais de scolarité se calculent sur la base du coefficient familial
+	// un $cf non-numérique donnera des frais de scolarité égaux à -1
 		if (is_numeric($cf)){
 			if($cf <= 12620) 	return 0.00;
 			if($cf <= 13190) 	return 100.00;
@@ -83,46 +106,28 @@ class Etudiant extends Personne{
 		}
 		else return -1;
 	}
-
-	public function suivreCours($ville, $ufr, $nomCours){
-		// prendre au hasard un cours qui existe dans l'ufr.
-	}
 }
 
 class Professeur extends Personne{
-	private $_salaire;
-	private $_ufr; // Cursus auquel le professeur est rattaché 
-	private $_ville; // ville à laquelle est rattaché le professeur
-	private $_arrCours; // liste de cours qu'enseigne le professeur
-	private $_arrVilles; // liste de villes où enseigne le professeur
+	protected $_salaire;
+	protected $_ufr; // Cursus auquel le professeur est rattaché 
+	protected $_ville; // ville à laquelle est rattaché le professeur
+	protected $_arrCours; // liste de cours qu'enseigne le professeur
+	protected $_arrVilles; // liste de villes où enseigne le professeur
 	
 	public function __construct($id){
 		$prof = parent::getInfoFromFile('data/professeurs.csv', $id);
 		parent::__construct($prof[0], $prof[1], $prof[2], $prof[3], $prof[4]); // $id, $nom, $prenom, $adresse, $age
 		$this->_salaire = $prof[5];
 		$this->_ville = $prof[6];
-		$this->_ufr = $prof[7];
-		//$this->_arrCours = $this->defCours($this->_ufr);
+		$this->_ufr = getUFR($prof[7]);
 		$this->_arrVilles = $this->setVilles($this->_ville);
+		$this->_arrCours = parent::setCours($this->_ufr);
 	}
 
-/*	private function defCours($ufr){		// permet de définir la liste des cours que le prof est censé enseigner
-		$coursProf = array();					// constitue l'ensemble des cours que le prof va enseigner
-		//$coursUFR; // doit être issu du constructeur d'UFR.
-		$nb_coursUFR = count($coursUFR);
-		$nb_cours_prof = rand(1, $nb_coursUFR); 					// on choisit arbitrairement un nombre de matières que le prof enseigne
-		while(count($coursProf) < $nb_cours_prof){					// tant qu'on n'a pas attribué le nb correct de cours au prof
-			$coursHasard = $coursUFR[rand(0, $nb_cours_prof - 1)]; 	// on pioche un cours de l'UFR au hasard
-			if(!in_array($coursHasard, $coursProf)){ 				// si le cours ne fait pas déjà partie des cours enseignés par le prof
-				$coursProf[] = $coursHasard; 						// on l'ajoute
-				// il faudrait aussi mentionner le prof courant comme enseignant de l'UFR.
-			}
-		}
-
-		return $coursProf;
-	}*/
-
-	private function setVilles($ville){		// permet de définir au hasard une liste de villes dans lesquelles le professeur va enseigner
+	private function setVilles($ville){		
+	// permet de définir au hasard une liste de villes dans lesquelles le professeur va enseigner
+		
 		$villes = array('Nantes', 'Saint-Nazaire', 'Rennes'); 	// ensemble des villes possibles
 		$villesProf = array($ville);							// ensemble des villes dans lesquelles va enseigner le prof
 		$nb_villes = rand(1, 3); 								// on tire au hasard un nombre de villes
