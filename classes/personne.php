@@ -17,13 +17,16 @@ class Personne{
 	protected function getInfoFromFile($fname, $id){ 
 	// permet de renvoyer des infos d'une personne grâce à son ID, sous forme d'un tableau
 	// l'intérêt est de retirer les données nécessaires aux constructeurs de personnes d'un fichier csv
-		
+
 		$personne = array();
 		$fp = fopen($fname, 'r');
 		while(!feof($fp)){
 			$current = fgets($fp, 511);
 			if(substr_count($current, ';') >= 6){
 				$item = explode(';', $current);
+				foreach ($item as $field) {
+					$field = trim($field); // on nettoie les entrées.
+				}
 				if($item[0] == $id){
 					$personne = $item;
 					break;
@@ -61,6 +64,18 @@ class Personne{
 		return $cours;
 	}
 
+	protected function getUniv($ville){
+		foreach(Universite::getUniv() as $univ){
+			if($univ->get('_ville') == $ville) return $univ;
+		}
+	}
+
+	protected function getUFR(Universite $univ, $nomUfr){	// visiblement, il y a un souci ici              /!\
+		foreach ($univ->get('_arrUFR') as $ufr){
+			if($ufr->get('_nom') == $nomUfr) return $ufr; 
+		}
+	}
+
 	public function __toString(){
 		return $this->get('_prenom')." ".$this->get('_nom')." (".get_class($this)." ".$this->get('_id').")<br/>";
 	}
@@ -69,7 +84,7 @@ class Personne{
 class Etudiant extends Personne{
 	protected $_coefFam; 		// coefficient familial
 	protected $_fraisInscr; 	// frais d'inscription, dépendant du coefficient familial
-	protected $_ville; 			// ville à laquelle est rattaché l'étudiant
+	protected $_univ; 			// université à laquelle est rattaché l'étudiant
 	protected $_ufr; 			// Cursus dans lequel est inscrit l'étudiant
 	protected $_arrLivres; 		// liste des livres empruntés par l'étudiant
 	protected $_arrCours;		// liste des cours suivis par l'étudiant
@@ -79,8 +94,8 @@ class Etudiant extends Personne{
 		parent::__construct($etud[0], $etud[1], $etud[2], $etud[3], $etud[5]);
 		$this->_coefFam = $etud[6];
 		$this->_fraisInscr = $this->calculFrais($this->_coefFam);
-		$this->_ville = $etud[4];
-		$this->_ufr = $etud[7];
+		$this->_univ = parent::getUniv($etud[4]);
+		$this->_ufr = parent::getUFR($this->_univ, $etud[7]);
 		$this->_arrLivres = array();
 		$this->_arrCours = parent::setCours($this->_ufr);
 	}
@@ -110,19 +125,20 @@ class Etudiant extends Personne{
 
 class Professeur extends Personne{
 	protected $_salaire;
-	protected $_ufr; // Cursus auquel le professeur est rattaché 
-	protected $_ville; // ville à laquelle est rattaché le professeur
-	protected $_arrCours; // liste de cours qu'enseigne le professeur
-	protected $_arrVilles; // liste de villes où enseigne le professeur
+	protected $_ufr; 		// Cursus auquel le professeur est rattaché 
+	protected $_univ;		// université à laquelle est rattaché le professeur
+	protected $_arrCours; 	// liste de cours qu'enseigne le professeur
+	protected $_arrVilles; 	// liste de villes où enseigne le professeur
 	
 	public function __construct($id){
 		$prof = parent::getInfoFromFile('data/professeurs.csv', $id);
 		parent::__construct($prof[0], $prof[1], $prof[2], $prof[3], $prof[4]); // $id, $nom, $prenom, $adresse, $age
 		$this->_salaire = $prof[5];
-		$this->_ville = $prof[6];
-		$this->_ufr = getUFR($prof[7]);
-		$this->_arrVilles = $this->setVilles($this->_ville);
-		$this->_arrCours = parent::setCours($this->_ufr);
+		$this->_univ = parent::getUniv($prof[6]);
+		$this->_ufr = parent::getUFR($this->_univ, $prof[7]);
+		echo var_dump($this->_ufr);
+/*		$this->_arrVilles = $this->setVilles($prof[6]);
+		$this->_arrCours = parent::setCours($this->_ufr);*/
 	}
 
 	private function setVilles($ville){		
