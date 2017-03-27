@@ -46,17 +46,17 @@ class Personne{
 } 
 
 class Etudiant extends Personne{
-	private $_coefFam; 			// coefficient familial
-	private $_fraisInscr; 		// frais d'inscription, dépendant du coefficient familial
-	private $_ville; 			// ville à laquelle est rattaché l'étudiant
-	private $_ufr; 				// Cursus dans lequel est inscrit l'étudiant
-	private $_arrLivres; 		// liste des livres empruntés par l'étudiant
+	protected $_coefFam; 			// coefficient familial
+	protected $_fraisInscr; 		// frais d'inscription, dépendant du coefficient familial
+	protected $_ville; 			// ville à laquelle est rattaché l'étudiant
+	protected $_ufr; 				// Cursus dans lequel est inscrit l'étudiant
+	protected $_arrLivres; 		// liste des livres empruntés par l'étudiant
 
-	public function __construct($id, $nom, $prenom, $adresse, $ville, $age, $cf, $ufr){
+	public function __construct($id){
 		$etud = parent::getInfoFromFile('data/etudiants.csv', $id);
 		parent::__construct($etud[0], $etud[1], $etud[2], $etud[3], $etud[5]);
 		$this->_coefFam = $etud[6];
-		$this->_fraisInscr = calculFrais($cf);
+		$this->_fraisInscr = $this->calculFrais($this->_coefFam);
 		$this->_ville = $etud[4];
 		$this->_ufr = $etud[7];
 		$this->_arrLivres = array();
