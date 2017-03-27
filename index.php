@@ -1,4 +1,5 @@
 <?php 
+require_once('classes/charger.php');
 require_once('classes/personne.php');
 require_once('classes/universite.php');
 
@@ -7,14 +8,14 @@ function main(){
 	$univRennes = new Universite('Rennes');
 	$univNazaire = new Universite('Saint-Nazaire');
 
-	$professeur1 = new Professeur(154);
-	print $professeur1;
-//	print $professeur1->getVilles();
+	$tabEtudiants   = ChargerInfos::Charger("data/etudiants.csv", "Etudiant");
+	$tabProfesseurs = ChargerInfos::Charger("data/professeurs.csv", "Professeur");
+
+	print $tabProfesseurs[2];
 	echo "<br/>";
 
-/*	$etudiant1 = new Etudiant(281);
-	print $etudiant1;
-	echo "<br/>";*/
+	print $tabEtudiants[15];
+	echo "<br/>";
 
 /*	print "Coef Familial : ".$etudiant1->get('_coefFam')."<br/>";
 	print "Frais inscription : ".$etudiant1->get('_fraisInscr')."<br/>";
