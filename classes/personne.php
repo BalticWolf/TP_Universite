@@ -21,12 +21,9 @@ class Personne{
 		$personne = array();
 		$fp = fopen($fname, 'r');
 		while(!feof($fp)){
-			$current = fgets($fp, 511);
+			$current = trim(fgets($fp, 255));
 			if(substr_count($current, ';') >= 6){
-				$item = explode(';', $current);
-				foreach ($item as $field) {
-					$field = trim($field); // on nettoie les entrées.
-				}
+				$item = array_map('trim', explode(';', $current)); // nettoyer les données sources au passage
 				if($item[0] == $id){
 					$personne = $item;
 					break;
@@ -70,7 +67,7 @@ class Personne{
 		}
 	}
 
-	protected function getUFR(Universite $univ, $nomUfr){	// visiblement, il y a un souci ici              /!\
+	protected function getUFR(Universite $univ, $nomUfr){
 		foreach ($univ->get('_arrUFR') as $ufr){
 			if($ufr->get('_nom') == $nomUfr) return $ufr; 
 		}
@@ -136,9 +133,8 @@ class Professeur extends Personne{
 		$this->_salaire = $prof[5];
 		$this->_univ = parent::getUniv($prof[6]);
 		$this->_ufr = parent::getUFR($this->_univ, $prof[7]);
-		echo var_dump($this->_ufr);
-/*		$this->_arrVilles = $this->setVilles($prof[6]);
-		$this->_arrCours = parent::setCours($this->_ufr);*/
+		$this->_arrVilles = $this->setVilles($prof[6]);
+		$this->_arrCours = parent::setCours($this->_ufr);
 	}
 
 	private function setVilles($ville){		
