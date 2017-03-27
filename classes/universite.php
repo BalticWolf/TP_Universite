@@ -2,9 +2,9 @@
 class Universite{
 	private $_ville;
 	private $_bu;
-	private $_arrUFR:
+	private $_arrUFR;
 
-	private function __construct($ville){
+	public function __construct($ville){
 		$this->_ville = $ville;
 		$this->_bu = new BU($this);
 		$this->_arrUFR = $this->listerUFR();
@@ -31,6 +31,10 @@ class Universite{
 		$tabUFR[] = new UFR($this, 'DSP', 'Droit et Sciences Politiques');
 
 		return $tabUFR;
+	}
+
+	public function __toString(){
+		return "Universite de ".$this->_ville."<br/>";
 	}
 }
 
@@ -110,15 +114,13 @@ class Cours{
 
 //-------------------------------------------
 class BU{
-	private $_univ;		// utilité à confirmer
 	private $_nom;
 	private $_arrLivresDispo; 	// liste des livres proposés à l'emprunt
 	private $_arrLivresEmprunt; // liste des livres empruntés
 
 	public function __construct(Universite $univ){
-		$this->_univ = $univ;
-		$this->_nom = 'BU'.$univ->get('_ville');
-		$this->_arrLivresDispo = $this->listerLivres(); 	// penser à initialiser ce tableau dans une autre méthode de la classe
+		$this->_nom = 'BU_'.$univ->get('_ville');
+		$this->_arrLivresDispo = $this->listerLivres();
 		$this->_arrLivresEmprunt = array();
 	}
 
@@ -132,7 +134,10 @@ class BU{
 	}
 	
 	public function emprunterLivre(Etudiant $etud, Livre $livre, $dateEmprunt){
-		$this->_arrLivresEmprunt[] = array($etud, $dateEmprunt, null); // null correspond à la date à laquelle est rendu le livre
+		if (!in_array($livre, $this->_arrLivresEmprunt)){
+			$this->_arrLivresEmprunt[] = array($etud, $dateEmprunt, null); // null = date de remise
+			$this->_arrLivresDispo = array_diff($this->_arrLivresDispo, $this->_arrLivresEmprunt); // la iste de livres dispo est emputée de la liste de livres empruntés
+		}
 	}
 
 	public function rendreLivre(Etudiant $etud, Livre $livre, $dateRendu){
@@ -152,17 +157,29 @@ class BU{
 		fclose($fp);
 		return $listeLivre;
 	}
+
+	public function getLivres($attr){
+		$result = '';
+		foreach($this->$attr as $livre){
+			$result .= $livre."<br/>";
+		}
+		return $result;
+	}
+
+	public function __toString(){
+		return $this->_nom."<br/>";
+	}
 }
 
 class Livre{
-	private $_bu;
+	//private $_bu;
 	private $_titre;
 	private $_auteur;
 	private $_dateParution;
 	private $_numSerie;
 
 	public function __construct(BU $bu, $titre, $auteur, $dateParu, $nSerie){
-		$this->_bu = $bu;
+		//$this->_bu = $bu;
 		$this->_titre = $titre;
 		$this->_auteur = $auteur;
 		$this->_dateParution = $dateParu;
@@ -176,6 +193,10 @@ class Livre{
 	public function set($attr, $val){
 		$this->$attr = $val;
 		return $this;
+	}
+
+	public function __toString(){
+		return $this->_titre." ".$this->_numSerie;
 	}
 }
 ?>
