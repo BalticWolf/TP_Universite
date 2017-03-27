@@ -98,11 +98,11 @@ class Professeur extends Personne{
 		$this->_salaire = $prof[5];
 		$this->_ville = $prof[6];
 		$this->_ufr = $prof[7];
-		$this->_arrCours = $this->defCours($this->_ufr);
-		$this->_arrVille = $this->defVilles($this->_ville);
+		//$this->_arrCours = $this->defCours($this->_ufr);
+		//$this->_arrVille = $this->defVilles($this->_ville);
 	}
 
-	private defCours($ufr){		// permet de définir la liste des cours que le prof est censé enseigner
+/*	private function defCours($ufr){		// permet de définir la liste des cours que le prof est censé enseigner
 		$coursProf = array();					// constitue l'ensemble des cours que le prof va enseigner
 		//$coursUFR; // doit être issu du constructeur d'UFR.
 		$nb_coursUFR = count($coursUFR);
@@ -118,7 +118,7 @@ class Professeur extends Personne{
 		return $coursProf;
 	}
 
-	private defVilles($ville){		// permet de définir au hasard une liste de villes dans lesquelles le professeur va enseigner
+	private function defVilles($ville){		// permet de définir au hasard une liste de villes dans lesquelles le professeur va enseigner
 		$villes = array('Nantes', 'Saint-Nazaire', 'Rennes'); 	// ensemble des villes possibles
 		$villesProf = array();									// emsemble des villes dans lesquelles va enseigner le prof
 		$nb_villes = rand(1, 3); 								// on tire au hasard un nombre de villes
@@ -130,7 +130,7 @@ class Professeur extends Personne{
 			}
 		}
 		return $villesProf;
-	}
+	}*/
 }
 
 ?>
