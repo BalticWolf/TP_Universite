@@ -1,13 +1,19 @@
 <?php 
 class Universite{
+	private static $_UNIVERSITE = array();
 	private $_ville;
 	private $_bu;
 	private $_arrUFR;
 
+	static public function getUniv(){
+		return self::$_UNIVERSITE;
+	}
+	
 	public function __construct($ville){
 		$this->_ville = $ville;
 		$this->_bu = new BU($this);
 		$this->_arrUFR = $this->listerUFR();
+		self::$_UNIVERSITE[] = $this;
 	}
 
 	public function get($attr){
@@ -41,6 +47,7 @@ class Universite{
 		}
 		return -1;
 	}
+
 
 	public function getUFR($nom = ''){ 
 	// renvoie par défaut tous les cours de toutes les UFR, ou d'une UFR en particulier si précisée
