@@ -33,6 +33,31 @@ class Universite{
 		return $tabUFR;
 	}
 
+	private function getIndex($nom){
+		$i = 0;
+		foreach ($this->_arrUFR as $ufr) {
+			if ($ufr->get('_nom') == $nom) return $i;
+			$i++;
+		}
+		return -1;
+	}
+
+	public function getUFR($nom = ''){ 
+	// renvoie par défaut tous les cours de toutes les UFR, ou d'une UFR en particulier si précisée
+		$s = '';
+		if($nom != ''){
+			$s .= $nom.'<br/>';
+			$s .= $this->_arrUFR[$this->getIndex($nom)]->getCours().'<br/>';
+		}
+		else{
+			foreach($this->_arrUFR as $ufr){
+				$s .= $ufr->get('_nom').'<br/>';
+				$s .= $ufr->getCours().'<br/>';
+			}
+		}
+		return $s;
+	}
+
 	public function __toString(){
 		return "Universite de ".$this->_ville."<br/>";
 	}
@@ -48,7 +73,7 @@ class UFR{
 		$this->_univ = $univ;
 		$this->_nom = $nom;
 		$this->_libelle = $lib;
-		$this->_arrCours = $this->listerCours($this->_nom);
+		$this->_arrCours = $this->setCours($this->_nom);
 	}
 
 	public function get($attr){
@@ -60,20 +85,32 @@ class UFR{
 		return $this;
 	}
 
-	private function listerCours($ufr){			// cette méthode liste les cours appartenant à une UFR donnée
+	private function setCours($ufr){			// cette méthode liste les cours appartenant à une UFR donnée
 		$listeCours = array(); 					// constitue l'ensemble des cours dépendant d'une UFR donnée
 		$fp = fopen('data/cours.csv', 'r');
 		while(!feof($fp)){
-			$current = fgets($fp, 255);
+			$current = trim(fgets($fp, 255));
 			if(substr_count($current, ';') == 2){
 				$item = explode(';', $current);
-				if($item[2] == $ufr){ 			// on ne sélectionne que les cours de l'UFR
-					$listeCours[] = new Cours($this, $item[1]);
+				if(trim($item[2]) == $ufr){ 			// on ne sélectionne que les cours de l'UFR
+					$listeCours[] = new Cours($this, trim($item[1]));
 				}
 			}
 		}
 		fclose($fp);
 		return $listeCours;
+	}
+
+	public function getCours(){
+		$s = '';
+		foreach($this->_arrCours as $cours){
+			$s .= "- ".$cours->get('_nom').'<br/>';
+		}
+		return $s;
+	}
+
+	public function __toString(){
+		return $this->_nom." | ".$this->_libelle;
 	}
 }
 
@@ -110,6 +147,10 @@ class Cours{
 				break;
 		}
 	}
+
+	public function __toString(){
+		return $this->_nom." (".$this->_ufr->get('_nom').")<br/>";
+	}
 }
 
 //-------------------------------------------
@@ -120,7 +161,7 @@ class BU{
 
 	public function __construct(Universite $univ){
 		$this->_nom = 'BU_'.$univ->get('_ville');
-		$this->_arrLivresDispo = $this->listerLivres();
+		$this->_arrLivresDispo = $this->setLivres();
 		$this->_arrLivresEmprunt = array();
 	}
 
@@ -144,7 +185,7 @@ class BU{
 		// y'a encore du boulot sur cette méthode.
 	}
 
-	private function listerLivres(){			// cette méthode liste les cours appartenant à une UFR donnée
+	private function setLivres(){			// cette méthode liste les cours appartenant à une UFR donnée
 		$listeLivre = array(); 					// constitue l'ensemble des cours dépendant d'une UFR donnée
 		$fp = fopen('data/livres.csv', 'r');
 		while(!feof($fp)){
