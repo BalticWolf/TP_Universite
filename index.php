@@ -1,7 +1,7 @@
 <?php 
 require_once('classes/charger.php');
-require_once('classes/personne.php');
 require_once('classes/universite.php');
+require_once('classes/personne.php');
 
 function main(){
 	$univNantes = new Universite('Nantes');
@@ -11,10 +11,10 @@ function main(){
 	$tabEtudiants   = ChargerInfos::Charger("data/etudiants.csv", "Etudiant");
 	$tabProfesseurs = ChargerInfos::Charger("data/professeurs.csv", "Professeur");
 
-	print $tabProfesseurs[2];
+	print $tabProfesseurs[2]->get('_pers');
 	echo "<br/>";
 
-	print $tabEtudiants[15];
+	print $tabEtudiants[15]->get('_pers');
 	echo "<br/>";
 
 /*	print "Coef Familial : ".$etudiant1->get('_coefFam')."<br/>";
