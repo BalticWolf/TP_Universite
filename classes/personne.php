@@ -7,7 +7,7 @@ class Personne{
 	protected $_age;
 	protected static $_ID = 0;
 
-	protected function __construct($nom, $prenom, $adresse, $age){
+	public function __construct($nom, $prenom, $adresse, $age){
 		$this->_id = ++self::$_ID; // définit un nouvel _id tout en incrémentant l'index global des ID
 		$this->_nom = $nom;
 		$this->_prenom = $prenom;
